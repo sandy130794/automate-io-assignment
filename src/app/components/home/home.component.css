@@ -1,0 +1,60 @@
+.navigation_container {
+    height: 4.2em;
+}
+.navbar {
+    background-color: grey !important;
+    position: fixed;
+    width: 100%;
+}
+
+.nav-link {
+    margin: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.searchbox {
+    border-radius: 20px;
+    /* box-shadow: 2px 3px 5px black; */
+}
+
+.notes_container {
+}
+
+.list_container {
+    vertical-align: top;
+    width: 25%;
+    display: inline-block;
+    height: 100vh;
+    border-right: 1px solid #383535;
+    padding: 8px;
+    overflow-y: scroll;
+
+    /* width */
+    /* ::-webkit-scrollbar {
+        width: 10px;
+    } */
+    /* Track */
+    /* ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px black; 
+        border-radius: 10px;
+    } */
+    /* Handle */
+    /* ::-webkit-scrollbar-thumb {
+        background: grey; 
+        border-radius: 10px;
+    } */
+}
+
+
+
+.display_container {
+    vertical-align: top;
+    width: 75%;
+    display: inline-block;
+    height: 100vh;
+    padding: 8px;
+    overflow: auto;
+}

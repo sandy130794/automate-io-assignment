@@ -1,0 +1,15 @@
+.sampleNote {
+    overflow: auto;
+    height: 7em;
+    background-color: #FAEDBE;
+}
+.sampleHeader {
+    margin: 10px 10px;
+    font-style: italic;
+}
+
+.noteList {
+    overflow: auto;
+    height: 7em;
+    background-color: white;
+}

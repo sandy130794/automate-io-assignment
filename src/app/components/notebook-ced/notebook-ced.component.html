@@ -1,0 +1,11 @@
+<div>
+    <div>
+        <!-- <textarea name="" id="" cols="30" rows="10" placeholder="Note Heading"></textarea> -->
+        <input class="note_header" type="text" placeholder="Note Heading" [ngModel]="addingNewNotes" (ngModelChange)="noteTitle($event)">
+        <!-- <input class="note_header" type="text" placeholder="Heading" [(ngModel)]="addingNewNotes" (Keydown)="onKeydown($event)"> -->
+    </div>
+    <div>
+        <!-- <textarea name="" id="" cols="30" rows="10" placeholder="Note description"></textarea> -->
+        <input class="note_description" type="text" placeholder="Note description">
+    </div>
+</div>
