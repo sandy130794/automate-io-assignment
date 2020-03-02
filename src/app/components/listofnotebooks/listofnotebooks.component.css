@@ -10,6 +10,7 @@
 
 .noteList {
     overflow: auto;
-    height: 7em;
-    background-color: white;
+    /* height: 7em; */
+    background-color: #DDD;
+    border-bottom: 1px solid #FFF;
 }

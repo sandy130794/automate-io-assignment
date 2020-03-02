@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ListOfNotesProperties } from '../../models/listOfNotes';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -7,33 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  noteHeader;
-  noteCreation = false;
-  
-  constructor() { }
+  selectedNoteIndex;
+  isCreate: boolean;
+  disableCreate: boolean;
+
+  constructor(private sharedService: SharedService) {
+    this.sharedService.noteItemTextChangeSubscription().subscribe(data => {
+      this.selectedNoteIndex = data.index;
+      if(this.selectedNoteIndex === -1){
+        this.isCreate = false;
+      }
+      if (data.selectedItem && !data.selectedItem.title && !data.selectedItem.description) {
+        this.disableCreate = true;
+      } else {
+        this.disableCreate = false;
+      }
+    });
+  }
 
   ngOnInit() {
   }
 
-  childtoParentHeading(val) {
-    // console.log(val)
-    this.noteHeader = val;
-  }
-
-  // creates and Adds a new note to the list
   createNote() {
-    if (this.noteHeader !== '') {
-      this.noteCreation = true;
+    this.isCreate = true;
+    if (this.selectedNoteIndex !== -1) {
+      this.sharedService.noteItemTextChanged.next({
+        selectedItem: {},
+        index: -1
+      });
     }
   }
-
-  diablecreate(value) {
-    this.noteCreation = value;
-  }
-
-  // detes a note from the list
-  deleteNote() {}
-
-  // searchnote form the list
 
 }

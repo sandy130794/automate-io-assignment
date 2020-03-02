@@ -1,20 +1,25 @@
 <div>
-    <div class="sampleNote">
-        <h6 class="sampleHeader">{{receiveTitle}}</h6>
-        <!-- <div>
-            <p>time stamp</p>
-            <p>description for the note</p>
-        </div> -->
+    <div class="sampleNote" *ngIf="selectedIndex === -1">
+        <h6 class="sampleHeader">{{selectedItem?.title}}</h6>
+
+        <div>
+            <p>{{selectedItem?.description}}</p>
+        </div>
+        <div>
+            <p>{{selectedItem?.timeStamp}}</p>
+        </div>
     </div>
-    <div class="noteList" *ngFor="let note of NotesList">
-        <h6 class="sampleHeader">{{note}}</h6>
-        <!-- <div>
-            <p>time stamp</p>
-            <p>description for the note</p>
-        </div> -->
+    <div class="noteList" *ngFor="let note of notesList;let index=index" (click)="setSelectedItem(index);">
+        <h6 class="sampleHeader">{{note.title}}</h6>
+        <div>
+            <p>{{note.description}}</p>
+        </div>
+        <div>
+            <p>{{note.timeStamp}}</p>
+        </div>
     </div>
-    <div >
+    <!-- <div >
         <h3 class=""></h3>
         <p></p>
-    </div>
+    </div> -->
 </div>
