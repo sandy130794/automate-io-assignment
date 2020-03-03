@@ -5,17 +5,14 @@
         <div>
             <p>{{selectedItem?.description}}</p>
         </div>
-        <div>
-            <p>{{selectedItem?.timeStamp}}</p>
-        </div>
     </div>
-    <div class="noteList" *ngFor="let note of notesList;let index=index" (click)="setSelectedItem(index);">
+    <div class="noteList" *ngFor="let note of filteredList;let index=index" (click)="setSelectedItem(index);">
         <h6 class="sampleHeader">{{note.title}}</h6>
         <div>
             <p>{{note.description}}</p>
         </div>
         <div>
-            <p>{{note.timeStamp}}</p>
+            <p>{{note.timeStamp | convertDate}}</p>
         </div>
     </div>
     <!-- <div >

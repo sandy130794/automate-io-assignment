@@ -14,10 +14,12 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
   @Input() newItem;
   @Input() isCreateMode;
   @Input() isDeleteMode;
+  @Input() searchText;
   notesList = [];
-  // noteTitle = 'Example Note';
   selectedItem: any;
   selectedIndex: number;
+
+  filteredList = [];
 
   @Output() changeDeleteStatus = new EventEmitter<any>();
 
@@ -36,6 +38,7 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.isCreateMode && this.isCreateMode) {
       this.notesList.unshift(this.selectedItem);
+      this.filteredList = this.notesList;
       this.selectedIndex = 0;
       this.sharedService.noteItemTextChanged.next({
         selectedItem: this.selectedItem,
@@ -45,6 +48,10 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
 
     if (changes.isDeleteMode && this.isDeleteMode) {
       this.deleteNote();
+    }
+
+    if (changes.searchText) {
+      this.filterNotesBySearchText();
     }
   }
 
@@ -59,6 +66,7 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
 
   deleteNote() {
     this.notesList.splice(this.selectedIndex, 1);
+    this.filteredList = this.notesList;
     if (this.notesList.length === 0) {
       this.sharedService.noteItemTextChanged.next({
         selectedItem: {},
@@ -66,5 +74,19 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
       });
     }
     this.changeDeleteStatus.emit(false);
+  }
+
+  filterNotesBySearchText() {
+    if (!this.searchText) {
+      this.filteredList = this.notesList;
+      return;
+    }
+    const lowerCaseSearchText = this.searchText.toLowerCase();
+    this.filteredList = this.notesList.filter((note) => {
+        return Object.values(note).some( val => 
+            val.toString().toLowerCase().includes(lowerCaseSearchText) 
+        );
+    });
+
   }
 }

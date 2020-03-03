@@ -20,14 +20,14 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2 searchbox" type="search" placeholder="Search.." aria-label="Search">
+          <input class="form-control mr-sm-2 searchbox" type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" placeholder="Search.." aria-label="Search">
         </form>
       </div>
     </nav>
   </div>
   <div class="notes_container">
     <div class="list_container">
-      <app-listofnotebooks [isCreateMode]="isCreate" [isDeleteMode]="isDelete" (changeDeleteStatus)="updateDeleteStatus($event)"></app-listofnotebooks>
+      <app-listofnotebooks [isCreateMode]="isCreate" [isDeleteMode]="isDelete" (changeDeleteStatus)="updateDeleteStatus($event)" [searchText]="searchText"></app-listofnotebooks>
     </div>
     <div class="display_container">
       <app-notebook-ced></app-notebook-ced>

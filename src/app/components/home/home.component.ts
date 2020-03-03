@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   isCreate: boolean;
   isDelete: boolean;
   disableCreate: boolean;
+  searchText = '';
 
   constructor(private sharedService: SharedService) {
     this.sharedService.noteItemTextChangeSubscription().subscribe(data => {
