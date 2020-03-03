@@ -30,7 +30,9 @@
   </div>
   <div class="notes_container">
     <div class="list_container" id="sidePanel">
-      <app-listofnotebooks [isCreateMode]="isCreate" [isDeleteMode]="isDelete" (changeDeleteStatus)="updateDeleteStatus($event)" [searchText]="searchText"></app-listofnotebooks>
+      <app-listofnotebooks [isCreateMode]="isCreate" 
+      [isDeleteMode]="isDelete" 
+      (changeDeleteStatus)="updateDeleteStatus($event)" [searchText]="searchText"></app-listofnotebooks>
     </div>
     <div class="display_container" id="main">
       <app-notebook-ced></app-notebook-ced>

@@ -1,18 +1,18 @@
 <div>
     <div class="sampleNote" *ngIf="selectedIndex === -1">
-        <h6 class="sampleHeader">{{selectedItem?.title}}</h6>
+        <h6 class="noteText">{{selectedItem?.title}}</h6>
 
-        <div>
+        <div class="noteText">
             <p>{{selectedItem?.description}}</p>
         </div>
     </div>
     <div class="noteList" *ngFor="let note of filteredList;let index=index" (click)="setSelectedItem(index);" [ngClass]="{'selectedItem': selectedIndex === index}">
-        <h6 class="sampleHeader">{{note.title}}</h6>
-        <div>
+        <h6 class="noteText">{{note.title}}</h6>
+        <div class="noteText">
             <p>{{note.description}}</p>
         </div>
-        <div>
-            <p>{{note.timeStamp | convertDate}}</p>
+        <div class="noteText">
+            <p>{{note.timeStamp | convertDate}} ago</p>
         </div>
     </div>
     <!-- <div >
