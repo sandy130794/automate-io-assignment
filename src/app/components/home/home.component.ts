@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
   toggleSidePanel() {
     if (document.getElementById('sidePanel').style.width && document.getElementById('sidePanel').style.width !== '0px') {
       document.getElementById('sidePanel').style.width = '0';
-      document.getElementById('main').style.width = '98%';
+      document.getElementById('main').style.width = '90%';
     } else {
       document.getElementById('sidePanel').style.width = '25%';
       document.getElementById('main').style.width = '73%';
