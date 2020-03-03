@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { ListOfNotesProperties } from '.././models/listOfNotes';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Note } from '.././models/listOfNotes';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,12 @@ export class SharedService {
   }
 
   constructor() { }
-  noteStorage(List: ListOfNotesProperties) {
-    localStorage.setItem('list', JSON.stringify(List));
+
+  storeNotes(list: Note[]) {
+    localStorage.setItem('notesData', JSON.stringify(list));
+  }
+
+  getNotes() {
+    return localStorage.getItem('notesData');
   }
 }

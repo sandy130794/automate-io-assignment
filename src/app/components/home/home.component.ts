@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ListOfNotesProperties } from '../../models/listOfNotes';
 import { SharedService } from 'src/app/services/shared.service';
+import { faTrash, faEdit, faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit {
   isDelete: boolean;
   disableCreate: boolean;
   searchText = '';
+  deleteIcon = faTrash;
+  editIcon = faEdit;
+  barsIcon = faBars;
 
   constructor(private sharedService: SharedService) {
     this.sharedService.noteItemTextChangeSubscription().subscribe(data => {
@@ -56,6 +59,17 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.isDelete = event;
     });
+  }
+
+  toggleSidePanel() {
+    if (document.getElementById('sidePanel').style.width && document.getElementById('sidePanel').style.width !== '0px') {
+      document.getElementById('sidePanel').style.width = '0';
+      document.getElementById('main').style.width = '98%';
+    } else {
+      document.getElementById('sidePanel').style.width = '25%';
+      document.getElementById('main').style.width = '73%';
+    }
+
   }
 
 }

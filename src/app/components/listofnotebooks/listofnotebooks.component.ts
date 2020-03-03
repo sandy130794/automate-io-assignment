@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter, OnChanges } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
-import { ListOfNotesProperties } from '../../models/listOfNotes';
+import { Note } from '../../models/listOfNotes';
 
 @Component({
   selector: 'app-listofnotebooks',
@@ -23,9 +23,7 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
 
   @Output() changeDeleteStatus = new EventEmitter<any>();
 
-  constructor(private sharedService: SharedService) { }
-
-  ngOnInit() {
+  constructor(private sharedService: SharedService) {
     this.sharedService.noteItemTextChangeSubscription().subscribe(data => {
       this.selectedIndex = data.index;
       this.selectedItem = data.selectedItem;
@@ -35,10 +33,20 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
     });
   }
 
+  ngOnInit() {
+    const storedNotes = this.sharedService.getNotes();
+    if (storedNotes) {
+      this.notesList = JSON.parse(storedNotes);
+      this.filteredList = this.notesList;
+    }
+
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.isCreateMode && this.isCreateMode) {
       this.notesList.unshift(this.selectedItem);
       this.filteredList = this.notesList;
+      this.sharedService.storeNotes(this.notesList);
       this.selectedIndex = 0;
       this.sharedService.noteItemTextChanged.next({
         selectedItem: this.selectedItem,
@@ -74,6 +82,7 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
       });
     }
     this.changeDeleteStatus.emit(false);
+    this.sharedService.storeNotes(this.notesList);
   }
 
   filterNotesBySearchText() {
@@ -83,9 +92,9 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
     }
     const lowerCaseSearchText = this.searchText.toLowerCase();
     this.filteredList = this.notesList.filter((note) => {
-        return Object.values(note).some( val => 
-            val.toString().toLowerCase().includes(lowerCaseSearchText) 
-        );
+      return Object.values(note).some(val =>
+        val.toString().toLowerCase().includes(lowerCaseSearchText)
+      );
     });
 
   }

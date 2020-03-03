@@ -1,10 +1,11 @@
 .navigation_container {
-    height: 4.2em;
+    height: 60px;
 }
 .navbar {
-    background-color: grey !important;
+    background-color: #e1dde2 !important;
     position: fixed;
     width: 100%;
+    height: 60px;
 }
 
 .nav-link {
@@ -14,47 +15,44 @@
     cursor: pointer;
     outline: none;
 }
+.navbar-nav {
+    flex-direction: row;
+}
 
 .searchbox {
-    border-radius: 20px;
-    /* box-shadow: 2px 3px 5px black; */
+    border-radius: 8px;
+    outline: none;
+    margin-right: 10px;
 }
 
 .notes_container {
+    background-color: #fbfbf8;
 }
 
 .list_container {
     vertical-align: top;
     width: 25%;
     display: inline-block;
-    height: 100vh;
-    border-right: 1px solid #383535;
+    height: calc(100vh - 70px);
+    border-right: 1px solid #e1dde2;
     padding: 8px;
-    overflow-y: scroll;
-
-    /* width */
-    /* ::-webkit-scrollbar {
-        width: 10px;
-    } */
-    /* Track */
-    /* ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px black; 
-        border-radius: 10px;
-    } */
-    /* Handle */
-    /* ::-webkit-scrollbar-thumb {
-        background: grey; 
-        border-radius: 10px;
-    } */
+    overflow-y: auto;   
 }
-
-
 
 .display_container {
     vertical-align: top;
     width: 75%;
     display: inline-block;
-    height: 100vh;
+    height: calc(100vh - 70px);
     padding: 8px;
     overflow: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    #main {
+      width: 98%;
+    }
+    #sidePanel {
+        width: 0%;
+    }
 }

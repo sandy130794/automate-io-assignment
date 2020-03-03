@@ -1,5 +1,4 @@
-export interface ListOfNotesProperties {
-    id: number;
+export interface Note {
     title: string;
     description: string;
     timeStamp: any;

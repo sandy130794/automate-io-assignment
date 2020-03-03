@@ -6,7 +6,7 @@
             <p>{{selectedItem?.description}}</p>
         </div>
     </div>
-    <div class="noteList" *ngFor="let note of filteredList;let index=index" (click)="setSelectedItem(index);">
+    <div class="noteList" *ngFor="let note of filteredList;let index=index" (click)="setSelectedItem(index);" [ngClass]="{'selectedItem': selectedIndex === index}">
         <h6 class="sampleHeader">{{note.title}}</h6>
         <div>
             <p>{{note.description}}</p>

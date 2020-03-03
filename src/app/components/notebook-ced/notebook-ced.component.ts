@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnChanges, Input } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
-import { ListOfNotesProperties } from '../../models/listOfNotes';
+import { Note } from '../../models/listOfNotes';
 
 @Component({
   selector: 'app-notebook-ced',
