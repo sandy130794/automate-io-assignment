@@ -9,8 +9,8 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <button class="nav-link" href="#" (click)="deleteNote()">
-              <span class="glyphicon glyphicon-trash"></span>delete
+            <button class="nav-link" (click)="deleteNote($event)">
+              delete
             </button>
           </li>
           <li class="nav-item">
@@ -27,7 +27,7 @@
   </div>
   <div class="notes_container">
     <div class="list_container">
-      <app-listofnotebooks [isCreateMode]="isCreate"></app-listofnotebooks>
+      <app-listofnotebooks [isCreateMode]="isCreate" [isDeleteMode]="isDelete" (changeDeleteStatus)="updateDeleteStatus($event)"></app-listofnotebooks>
     </div>
     <div class="display_container">
       <app-notebook-ced></app-notebook-ced>

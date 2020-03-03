@@ -20,7 +20,6 @@ export class NotebookCedComponent implements OnInit {
   ngOnInit() {
     this.selectedNoteIndex = -1;
     this.sharedService.noteItemTextChangeSubscription().subscribe(data => {
-      console.log(data);
       if (Object.keys(data).length > 0) {
         this.selectedNoteIndex = data.index;
         this.title = data.selectedItem.title;
@@ -31,7 +30,6 @@ export class NotebookCedComponent implements OnInit {
 
   noteDataChange() {
     // Emits the event.
-    console.log(this.selectedNoteIndex);
     let itemObj = {};
     if (!this.title && !this.description) {
       itemObj = {

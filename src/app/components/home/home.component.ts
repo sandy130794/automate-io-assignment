@@ -11,13 +11,16 @@ export class HomeComponent implements OnInit {
 
   selectedNoteIndex;
   isCreate: boolean;
+  isDelete: boolean;
   disableCreate: boolean;
 
   constructor(private sharedService: SharedService) {
     this.sharedService.noteItemTextChangeSubscription().subscribe(data => {
       this.selectedNoteIndex = data.index;
-      if(this.selectedNoteIndex === -1){
-        this.isCreate = false;
+      if (this.selectedNoteIndex === -1) {
+        setTimeout(() => {
+          this.isCreate = false;
+        });
       }
       if (data.selectedItem && !data.selectedItem.title && !data.selectedItem.description) {
         this.disableCreate = true;
@@ -28,6 +31,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sharedService.noteItemTextChanged.next({
+      selectedItem: {},
+      index: -1
+    });
   }
 
   createNote() {
@@ -38,6 +45,16 @@ export class HomeComponent implements OnInit {
         index: -1
       });
     }
+  }
+
+  deleteNote(event) {
+    this.isDelete = true;
+  }
+
+  updateDeleteStatus(event) {
+    setTimeout(() => {
+      this.isDelete = event;
+    });
   }
 
 }

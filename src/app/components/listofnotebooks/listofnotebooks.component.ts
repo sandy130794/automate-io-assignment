@@ -13,10 +13,13 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
 
   @Input() newItem;
   @Input() isCreateMode;
+  @Input() isDeleteMode;
   notesList = [];
   // noteTitle = 'Example Note';
   selectedItem: any;
   selectedIndex: number;
+
+  @Output() changeDeleteStatus = new EventEmitter<any>();
 
   constructor(private sharedService: SharedService) { }
 
@@ -31,14 +34,17 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.isCreateMode) {
-      console.log(this.selectedItem);
+    if (changes.isCreateMode && this.isCreateMode) {
       this.notesList.unshift(this.selectedItem);
       this.selectedIndex = 0;
       this.sharedService.noteItemTextChanged.next({
         selectedItem: this.selectedItem,
         index: this.selectedIndex
       });
+    }
+
+    if (changes.isDeleteMode && this.isDeleteMode) {
+      this.deleteNote();
     }
   }
 
@@ -51,4 +57,14 @@ export class ListofnotebooksComponent implements OnInit, OnChanges {
     });
   }
 
+  deleteNote() {
+    this.notesList.splice(this.selectedIndex, 1);
+    if (this.notesList.length === 0) {
+      this.sharedService.noteItemTextChanged.next({
+        selectedItem: {},
+        index: -1
+      });
+    }
+    this.changeDeleteStatus.emit(false);
+  }
 }
